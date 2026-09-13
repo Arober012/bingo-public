@@ -2752,35 +2752,44 @@ function App() {
       ...themeCardsOverridesDraft,
       ...cardsOverrides,
     })
+    const previousUiBackgroundStyle = uiBackgroundStyle
+
+    // Force the full-gradient class immediately to avoid fallback flash while skin metadata loads.
+    setUiBackgroundStyle('full-gradient')
 
     void runAction('Apply skin live', async () => {
-      await requestJson(buildApiUrl(apiBase, tenantSlug, '/mod/theme'), {
-        method: 'PATCH',
-        headers: modJsonHeaders,
-        body: JSON.stringify({
-          mode: nextThemeMode,
-          linkControllerAndCards: nextThemeLink,
-          skinId: nextSkinId || null,
-        }),
-      })
+      try {
+        await requestJson(buildApiUrl(apiBase, tenantSlug, '/mod/theme'), {
+          method: 'PATCH',
+          headers: modJsonHeaders,
+          body: JSON.stringify({
+            mode: nextThemeMode,
+            linkControllerAndCards: nextThemeLink,
+            skinId: nextSkinId || null,
+          }),
+        })
 
-      if (nextThemeLink) {
-        await submitScopedThemePatch('all', nextLinkedOverrides)
-      } else {
-        await submitScopedThemePatch('controller', nextControllerOverrides)
-        await submitScopedThemePatch('cards', nextCardsOverrides)
-      }
+        if (nextThemeLink) {
+          await submitScopedThemePatch('all', nextLinkedOverrides)
+        } else {
+          await submitScopedThemePatch('controller', nextControllerOverrides)
+          await submitScopedThemePatch('cards', nextCardsOverrides)
+        }
 
-      setThemeModeDraft(nextThemeMode)
-      setThemeLinkDraft(nextThemeLink)
-      if (nextThemeLink) {
-        setThemeOverridesDraft(nextLinkedOverrides)
-      } else {
-        setThemeControllerOverridesDraft(nextControllerOverrides)
-        setThemeCardsOverridesDraft(nextCardsOverrides)
+        setThemeModeDraft(nextThemeMode)
+        setThemeLinkDraft(nextThemeLink)
+        if (nextThemeLink) {
+          setThemeOverridesDraft(nextLinkedOverrides)
+        } else {
+          setThemeControllerOverridesDraft(nextControllerOverrides)
+          setThemeCardsOverridesDraft(nextCardsOverrides)
+        }
+        setSelectedSkinId(nextSkinId)
+        setSkinDraftNotice(`Applied ${selectedSkin.name} live for Control, Viewer/Card, and Overlay.`)
+      } catch (nextError) {
+        setUiBackgroundStyle(previousUiBackgroundStyle)
+        throw nextError
       }
-      setSelectedSkinId(nextSkinId)
-      setSkinDraftNotice(`Applied ${selectedSkin.name} live for Control, Viewer/Card, and Overlay.`)
     })
   }
 
