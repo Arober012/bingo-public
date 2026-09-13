@@ -2740,7 +2740,7 @@ function App() {
         ...current,
         ...linkedOverrides,
       }))
-      setSkinDraftNotice(`Applied ${skin.name} to linked draft colors.`)
+      setSkinDraftNotice(`Applied ${skin.name} to linked draft colors. Click Save Theme to apply it live.`)
       return
     }
 
@@ -2752,7 +2752,7 @@ function App() {
       ...current,
       ...cardsOverrides,
     }))
-    setSkinDraftNotice(`Applied ${skin.name} to split controller/cards draft colors.`)
+    setSkinDraftNotice(`Applied ${skin.name} to split controller/cards draft colors. Click Save Theme to apply it live.`)
   }
 
   function submitApplySelectedSkin() {
@@ -2762,6 +2762,75 @@ function App() {
     }
 
     applySkinToDraft(selectedSkin)
+  }
+
+  function submitApplySelectedSkinLive() {
+    if (!selectedSkin) {
+      setSkinDraftNotice('Choose a skin before applying live.')
+      return
+    }
+
+    if (!requireThemeControl('Apply skin live')) {
+      return
+    }
+
+    const sharedOverrides = normalizeThemeOverrides(selectedSkin.palette)
+    const controllerOverrides = normalizeThemeOverrides({
+      ...sharedOverrides,
+      ...selectedSkin.controllerPalette,
+    })
+    const cardsOverrides = normalizeThemeOverrides({
+      ...sharedOverrides,
+      ...selectedSkin.cardsPalette,
+    })
+
+    const nextThemeMode = selectedSkin.mode ?? themeModeDraft
+    const nextThemeLink = themeLinkDraft
+    const nextSkinId = normalizeThemeSkinId(selectedSkin.id)
+    const nextLinkedOverrides = normalizeThemeOverrides({
+      ...themeOverridesDraft,
+      ...sharedOverrides,
+      ...selectedSkin.controllerPalette,
+      ...selectedSkin.cardsPalette,
+    })
+    const nextControllerOverrides = normalizeThemeOverrides({
+      ...themeControllerOverridesDraft,
+      ...controllerOverrides,
+    })
+    const nextCardsOverrides = normalizeThemeOverrides({
+      ...themeCardsOverridesDraft,
+      ...cardsOverrides,
+    })
+
+    void runAction('Apply skin live', async () => {
+      await requestJson(buildApiUrl(apiBase, tenantSlug, '/mod/theme'), {
+        method: 'PATCH',
+        headers: modJsonHeaders,
+        body: JSON.stringify({
+          mode: nextThemeMode,
+          linkControllerAndCards: nextThemeLink,
+          skinId: nextSkinId || null,
+        }),
+      })
+
+      if (nextThemeLink) {
+        await submitScopedThemePatch('all', nextLinkedOverrides)
+      } else {
+        await submitScopedThemePatch('controller', nextControllerOverrides)
+        await submitScopedThemePatch('cards', nextCardsOverrides)
+      }
+
+      setThemeModeDraft(nextThemeMode)
+      setThemeLinkDraft(nextThemeLink)
+      if (nextThemeLink) {
+        setThemeOverridesDraft(nextLinkedOverrides)
+      } else {
+        setThemeControllerOverridesDraft(nextControllerOverrides)
+        setThemeCardsOverridesDraft(nextCardsOverrides)
+      }
+      setSelectedSkinId(nextSkinId)
+      setSkinDraftNotice(`Applied ${selectedSkin.name} live for Control, Viewer/Card, and Overlay.`)
+    })
   }
 
   function clearSelectedSkin() {
@@ -2985,6 +3054,7 @@ function App() {
   const canReloadSkinLibrary = pendingAction === null
   const canApplySelectedSkin =
     capabilities.modTheme && pendingAction === null && skinLibraryReady && selectedSkin !== null
+  const canApplySelectedSkinLive = canApplySelectedSkin
   const canClearSelectedSkin = pendingAction === null && selectedSkinId.length > 0
   const canRemoveSkinAndRestoreDefaults = capabilities.modTheme && pendingAction === null
   const allowedHostList = allowedHosts.join(', ')
@@ -3463,6 +3533,9 @@ function App() {
                     <button type="button" disabled={!canApplySelectedSkin} onClick={submitApplySelectedSkin}>
                       Apply Skin To Draft
                     </button>
+                      <button type="button" disabled={!canApplySelectedSkinLive} onClick={submitApplySelectedSkinLive}>
+                        Apply Skin Live
+                      </button>
                     <button type="button" className="secondary" disabled={!canClearSelectedSkin} onClick={clearSelectedSkin}>
                       Clear Draft Selection
                     </button>
