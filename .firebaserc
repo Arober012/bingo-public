@@ -1,0 +1,50 @@
+{
+  "projects": {
+    "default": "public-bingo"
+  },
+  "targets": {
+    "stream-bingo-public-dev": {
+      "hosting": {
+        "overlay": [
+          "stream-bingo-public-overlay"
+        ],
+        "viewer": [
+          "stream-bingo-public-viewer"
+        ],
+        "control": [
+          "stream-bingo-public-control"
+        ],
+        "owner": [
+          "stream-bingo-owner"
+        ]
+      }
+    },
+    "public-bingo": {
+      "hosting": {
+        "overlay": [
+          "public-bingo-overlay"
+        ],
+        "viewer": [
+          "public-bingo-viewer"
+        ],
+        "control": [
+          "public-bingo-control"
+        ],
+        "owner": [
+          "public-bingo-owner"
+        ]
+      }
+    },
+    "stream-bingo-4b72e": {
+      "hosting": {
+        "control": [
+          "stream-bingo-control"
+        ],
+        "owner": [
+          "stream-bingo-owner"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

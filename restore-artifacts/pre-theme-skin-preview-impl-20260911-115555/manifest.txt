@@ -1,0 +1,4 @@
+timestamp=20260911-115555
+reason=Pre-change rollback snapshot before Theme+Skin tab reorganization and live preview implementation
+files=apps/control/src/App.tsx,apps/control/src/App.css
+planned_new_files=apps/control/public/skins/skins-manifest.json

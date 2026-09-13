@@ -1,0 +1,21 @@
+{
+  "projects": {
+    "default": "stream-bingo-4b72e"
+  },
+  "targets": {
+    "stream-bingo-4b72e": {
+      "hosting": {
+        "overlay": [
+          "stream-bingo-overlay"
+        ],
+        "viewer": [
+          "stream-bingo-viewer"
+        ],
+        "control": [
+          "stream-bingo-control"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

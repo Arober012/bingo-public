@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "candlelit-pumpkins",
+  "name": "Candlelit Pumpkins",
+  "description": "A dark Halloween skin with flickering jack-o'-lanterns and floating candle decorations.",
+  "background": {
+    "image": "background.webp",
+    "videoWebm": "background.webm",
+    "fit": "cover",
+    "position": "center center",
+    "loop": true,
+    "muted": true,
+    "playsInline": true,
+    "autoplay": true
+  },
+  "decorations": {
+    "left": {
+      "imageFallback": "left.webp",
+      "widthPx": 350,
+      "opacity": 0.92,
+      "anchorY": "center",
+      "blendMode": "screen",
+      "motion": "float-gentle",
+      "safeZoneOffsetPx": -60,
+      "offsetYPx": -140,
+      "lightEffect": "candle-flicker"
+    },
+    "right": {
+      "imageFallback": "right.webp",
+      "widthPx": 330,
+      "opacity": 0.92,
+      "anchorY": "center",
+      "blendMode": "screen",
+      "motion": "float-gentle",
+      "safeZoneOffsetPx": -40,
+      "offsetYPx": -120,
+      "lightEffect": "candle-flicker"
+    }
+  },
+  "palette": {
+    "backgroundStart": "#090711",
+    "backgroundMid": "#14101F",
+    "backgroundEnd": "#24162B",
+    "surface": "#17131D",
+    "surfaceAlt": "#241C2A",
+    "border": "#9B6238",
+    "borderSoft": "#594055",
+    "text": "#F7F0E4",
+    "textMuted": "#C0AEBB",
+    "accent": "#E78A32",
+    "accentContrast": "#21120A",
+    "called": "#C46B32",
+    "calledBg": "#43251D",
+    "free": "#F2B85A",
+    "freeBg": "#49321A",
+    "error": "#FF8E82",
+    "errorBg": "#4B2022",
+    "success": "#A7D69B",
+    "successBg": "#263D29",
+    "warning": "#F2BE68",
+    "warningBg": "#4A351C"
+  },
+  "uiTheme": {
+    "backgroundStyle": "full-gradient"
+  },
+  "animations": {
+    "free": "free-soft-pulse",
+    "called": "called-border-pulse",
+    "stamped": "stamped-pop-lock",
+    "hover": "hover-glow",
+    "winning": "winning-radiant",
+    "speedMultiplier": 0.85
+  },
+  "responsive": {
+    "max860": {
+      "left": "dim",
+      "right": "dim"
+    },
+    "max640": {
+      "left": "static-only",
+      "right": "static-only"
+    },
+    "max430": {
+      "left": "hide",
+      "right": "hide"
+    },
+    "max390": {
+      "left": "hide",
+      "right": "hide"
+    },
+    "max360": {
+      "left": "hide",
+      "right": "hide"
+    },
+    "shortMobile": {
+      "left": "hide",
+      "right": "hide"
+    }
+  }
+}

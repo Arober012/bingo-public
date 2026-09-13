@@ -1,0 +1,55 @@
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --theme-background-start: #081124;
+  --theme-background-mid: #121f38;
+  --theme-background-end: #1c2f4f;
+  --theme-surface: #132746;
+  --theme-surface-alt: #1d3a62;
+  --theme-border: #4f7bb2;
+  --theme-border-soft: #365a8b;
+  --theme-text: #f4f8ff;
+  --theme-text-muted: #bed2f0;
+  --theme-accent: #6ad9ff;
+  --theme-accent-contrast: #0f2340;
+  --theme-called: #5dcf9b;
+  --theme-called-bg: #133f31;
+  --theme-free: #ffd17d;
+  --theme-free-bg: #4f3820;
+  --theme-error: #ff8d8d;
+  --theme-error-bg: #4f2323;
+  --theme-success: #9ef8c7;
+  --theme-success-bg: #1d4a39;
+  --theme-warning: #ffd27e;
+  --theme-warning-bg: #4c3b1a;
+}
+
+:root[data-theme-mode='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme-mode='dark'] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+body,
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body {
+  background: var(--theme-background-start);
+  color: var(--theme-text);
+}

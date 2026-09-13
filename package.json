@@ -1,0 +1,37 @@
+{
+  "name": "bingo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Twitch bingo overlay monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "run-p dev:controller dev:overlay dev:viewer",
+    "dev:controller": "npm --workspace @bingo/controller run dev",
+    "dev:overlay": "npm --workspace @bingo/overlay run dev",
+    "dev:viewer": "npm --workspace @bingo/viewer run dev",
+    "dev:control": "npm --workspace @bingo/control run dev",
+    "dev:owner": "npm --workspace @bingo/owner run dev",
+    "start": "npm --workspace @bingo/controller run start",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "overrides": {
+    "ws": "8.21.1",
+    "tmi.js": {
+      "ws": "8.21.1"
+    }
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "eslint": "^8.57.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.6.2",
+    "typescript": "~6.0.2"
+  }
+}

@@ -1,0 +1,4 @@
+- Keep Twitch game authority in apps/controller.
+- Keep reusable bingo logic in packages/game-core.
+- Keep stream visuals in apps/overlay and viewer interactions in apps/viewer.
+- Validate all stamp and win actions on the server side.

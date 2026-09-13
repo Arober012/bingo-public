@@ -1,0 +1,9 @@
+restore_id=pre-theme-player-upgrade-20260814-161445
+created_at=2026-08-14T16:14:45.7066168-06:00
+workspace=C:\Users\Austi\Desktop\Overlays\BINGO - Public
+git_available=False
+files=
+apps/controller/src/index.ts
+apps/control/src/App.tsx
+apps/control/src/App.css
+apps/controller/test/mod-options-control.test.mjs

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MixItUp Tenant Redeem Reference Sheet</title>
+  <style>
+    :root {
+      --ink: #10243a;
+      --muted: #4e6478;
+      --line: #d7e3ee;
+      --panel: #f7fbff;
+      --accent: #0f5ea8;
+      --ok: #0f7a49;
+      --warn: #9a5b00;
+      --error: #a32121;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+      line-height: 1.35;
+      font-size: 12px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      letter-spacing: 0.2px;
+      color: var(--ink);
+    }
+
+    .sub {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .callout {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      margin: 12px 0 16px;
+    }
+
+    h2 {
+      margin: 16px 0 8px;
+      font-size: 16px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 4px;
+    }
+
+    h3 {
+      margin: 10px 0 6px;
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .tenant {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .label {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .value {
+      margin: 2px 0 7px;
+      color: var(--ink);
+      word-break: break-word;
+    }
+
+    .mono {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11px;
+      white-space: pre-wrap;
+      margin: 0;
+      background: #f8fbff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px;
+    }
+
+    .steps {
+      margin: 6px 0 0 18px;
+      padding: 0;
+    }
+
+    .steps li { margin: 4px 0; }
+
+    .trouble {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .trouble li {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--warn);
+      padding: 8px;
+      margin: 6px 0;
+      border-radius: 4px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .trouble li.error { border-left-color: var(--error); }
+    .trouble li.ok { border-left-color: var(--ok); }
+
+    .footer {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    .small {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 4px 0 0;
+    }
+
+    @media print {
+      .page {
+        max-width: 100%;
+        padding: 12mm;
+      }
+      h1 { font-size: 22px; }
+      h2 { font-size: 15px; }
+      .tenant { border-radius: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>MixItUp Tenant Redeem Reference Sheet</h1>
+    <p class="sub">Channel Points -> Bingo Card | Public Bingo Operator Quick Guide</p>
+
+    <div class="callout">
+      <div><span class="label">Before setup:</span> Confirm tenant slug mapping in Owner panel, rotate a tenant redeem key for that slug, and ensure a bingo round is open or running for that tenant.</div>
+      <div class="small"><span class="label">Secret key safety:</span> Contact Bingo Owner For Secret Key and paste only that private key value after Bearer. Do not share it publicly.</div>
+    </div>
+
+    <h2>Common Request Template (All Slugs)</h2>
+    <div class="label">Method</div>
+    <div class="value">POST</div>
+    <div class="label">Headers</div>
+    <div class="value mono">Authorization: Bearer REPLACE_WITH_TENANT_REDEEM_KEY
+  Contact Bingo Owner For Secret Key
+  Do not share this key publicly.
+Content-Type: application/json</div>
+    <div class="label">Request Body (JSON)</div>
+    <pre class="mono">{
+  "redemptionId": "$usertwitchid-$dateyear$datemonth$dateday-$timedigits-$randomnumber999999999",
+  "twitchUserId": "$usertwitchid",
+  "twitchUserName": "$userdisplayname"
+}</pre>
+
+    <h2>Tenant Blocks</h2>
+    <div class="grid">
+      <section class="tenant">
+        <h3>BLOCK 1: live-bingo</h3>
+        <div class="label">Overlay URL</div>
+        <div class="value mono">https://public-overlay.custom-overlays.com/?tenant=live-bingo&api=https://public-control.custom-overlays.com</div>
+        <div class="label">Bingo Controller URL</div>
+        <div class="value mono">https://public-controller.custom-overlays.com/?tenant=live-bingo&api=https://public-control.custom-overlays.com</div>
+        <div class="label">Web Request URL</div>
+        <div class="value mono">https://public-control.custom-overlays.com/api/t/live-bingo/internal/redeem/join</div>
+        <div class="label">Authorization Value</div>
+        <div class="value mono">Bearer REPLACE_WITH_TENANT_REDEEM_KEY_LIVE_BINGO
+      Contact Bingo Owner For Secret Key
+      Do not share this key publicly.</div>
+      </section>
+
+      <section class="tenant">
+        <h3>BLOCK 2: livebingo-01</h3>
+        <div class="label">Overlay URL</div>
+        <div class="value mono">https://public-overlay.custom-overlays.com/?tenant=livebingo-01&api=https://public-control.custom-overlays.com</div>
+        <div class="label">Bingo Controller URL</div>
+        <div class="value mono">https://public-controller.custom-overlays.com/?tenant=livebingo-01&api=https://public-control.custom-overlays.com</div>
+        <div class="label">Web Request URL</div>
+        <div class="value mono">https://public-control.custom-overlays.com/api/t/livebingo-01/internal/redeem/join</div>
+        <div class="label">Authorization Value</div>
+        <div class="value mono">Bearer REPLACE_WITH_TENANT_REDEEM_KEY_LIVEBINGO_01
+      Contact Bingo Owner For Secret Key
+      Do not share this key publicly.</div>
+      </section>
+
+      <section class="tenant">
+        <h3>BLOCK 3: livebingo-02</h3>
+        <div class="label">Overlay URL</div>
+        <div class="value mono">https://public-overlay.custom-overlays.com/?tenant=livebingo-02&api=https://public-control.custom-overlays.com</div>
+        <div class="label">Bingo Controller URL</div>
+        <div class="value mono">https://public-controller.custom-overlays.com/?tenant=livebingo-02&api=https://public-control.custom-overlays.com</div>
+        <div class="label">Web Request URL</div>
+        <div class="value mono">https://public-control.custom-overlays.com/api/t/livebingo-02/internal/redeem/join</div>
+        <div class="label">Authorization Value</div>
+        <div class="value mono">Bearer REPLACE_WITH_TENANT_REDEEM_KEY_LIVEBINGO_02
+      Contact Bingo Owner For Secret Key
+      Do not share this key publicly.</div>
+      </section>
+    </div>
+
+    <h2>MixItUp Response Mapping</h2>
+    <div class="value mono">Response Processing Type: JSON to Special Identifiers
+viewerUrl   -> bingoviewurl
+error       -> bingoerror
+message     -> bingomessage</div>
+
+    <h2>Chat Message Action</h2>
+    <div class="value mono">Send as Streamer: On
+Whisper: On
+Whisper User: Leave blank
+Chat Message: @$userdisplayname Your Bingo card: $bingoviewurl</div>
+
+    <h2>First-Time Setup Steps</h2>
+    <ol class="steps">
+      <li>Rotate and copy tenant redeem key from Owner panel for the exact slug.</li>
+      <li>Open MixItUp Desktop and create/open your Bingo Card reward command.</li>
+      <li>Add a Web Request action and paste the matching tenant block.</li>
+      <li>Replace only the Bearer key placeholder. Contact Bingo Owner For Secret Key if you do not have it.</li>
+      <li>Add the Chat Message action values from this sheet.</li>
+      <li>Start a round in Bingo Control for the same tenant.</li>
+      <li>Redeem once and verify a viewer URL is delivered.</li>
+    </ol>
+
+    <h2>Quick Troubleshooting</h2>
+    <ul class="trouble">
+      <li class="error"><span class="label">join_not_available:</span> No active round is open/running for that tenant.</li>
+      <li class="error"><span class="label">invalid_tenant_redeem_auth / invalid_internal_secret:</span> Key is missing, wrong, or from another tenant.</li>
+      <li class="error"><span class="label">redeem_id_conflict:</span> Same redemptionId reused with a different twitchUserId.</li>
+      <li><span class="label">Redeems fail after key rotation:</span> Update MixItUp with newest key immediately.</li>
+      <li class="ok"><span class="label">Viewer says invite token missing:</span> Open the full viewerUrl returned by the API response.</li>
+    </ul>
+
+    <p class="small">Tip: If slug mapping is wrong, redeem may hit the wrong tenant context or fail unexpectedly. Verify Broadcaster -> Slug mapping in Owner panel Tenant Overview.</p>
+
+    <p class="footer">Reference generated for BINGO - Public</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "skins": [
+    {
+      "id": "candlelit-pumpkins",
+      "name": "Candlelit Pumpkins",
+      "description": "Halloween-style dark palette with warm pumpkin accents for spooky streams.",
+      "season": "halloween",
+      "tags": ["seasonal", "halloween", "dark"],
+      "mode": "dark",
+      "palette": {
+        "backgroundStart": "#090711",
+        "backgroundMid": "#14101F",
+        "backgroundEnd": "#24162B",
+        "surface": "#17131D",
+        "surfaceAlt": "#241C2A",
+        "border": "#9B6238",
+        "borderSoft": "#594055",
+        "text": "#F7F0E4",
+        "textMuted": "#C0AEBB",
+        "accent": "#E78A32",
+        "accentContrast": "#21120A",
+        "called": "#C46B32",
+        "calledBg": "#43251D",
+        "free": "#F2B85A",
+        "freeBg": "#49321A",
+        "error": "#FF8E82",
+        "errorBg": "#4B2022",
+        "success": "#A7D69B",
+        "successBg": "#263D29",
+        "warning": "#F2BE68",
+        "warningBg": "#4A351C"
+      },
+      "controllerPalette": {},
+      "cardsPalette": {}
+    },
+    {
+      "id": "frosted-midwinter",
+      "name": "Frosted Midwinter",
+      "description": "Icy winter look with crisp blues and high-contrast controls.",
+      "season": "winter",
+      "tags": ["seasonal", "winter", "frost"],
+      "mode": "dark",
+      "palette": {
+        "backgroundStart": "#061229",
+        "backgroundMid": "#0F2748",
+        "backgroundEnd": "#1A3A66",
+        "surface": "#102742",
+        "surfaceAlt": "#173558",
+        "border": "#70B5E8",
+        "text": "#EAF7FF",
+        "textMuted": "#B5D6EC",
+        "accent": "#89D6FF",
+        "accentContrast": "#10253E",
+        "called": "#63C7E8",
+        "calledBg": "#143E57",
+        "free": "#DDF7FF",
+        "freeBg": "#24486A"
+      },
+      "controllerPalette": {},
+      "cardsPalette": {
+        "success": "#B8F6E3",
+        "successBg": "#1E5B4B"
+      }
+    },
+    {
+      "id": "spring-sunrise",
+      "name": "Spring Sunrise",
+      "description": "Fresh bright palette tuned for daytime streams and softer panel contrast.",
+      "season": "spring",
+      "tags": ["seasonal", "spring", "light"],
+      "mode": "light",
+      "palette": {
+        "backgroundStart": "#F4FFF8",
+        "backgroundMid": "#E2F5FF",
+        "backgroundEnd": "#C9EAFF",
+        "surface": "#FFFFFF",
+        "surfaceAlt": "#F1FAFF",
+        "border": "#6EA0CF",
+        "text": "#102137",
+        "textMuted": "#43627F",
+        "accent": "#2F8FE3",
+        "accentContrast": "#FFFFFF",
+        "called": "#2AA58C",
+        "calledBg": "#D6F8F0",
+        "free": "#C27900",
+        "freeBg": "#FFEFC4"
+      },
+      "controllerPalette": {
+        "warning": "#8A5A00",
+        "warningBg": "#FFE4B8"
+      },
+      "cardsPalette": {
+        "success": "#166E42",
+        "successBg": "#D5FBE7"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+timestamp=20260814-1612
+current_branch=
+head_sha=
+head_short=
+checkpoint_branch=checkpoint/pre-theme-player-upgrade-20260814-1612
+restore_tag=restore/pre-theme-player-upgrade-20260814-1612
+bundle_path=C:\Users\Austi\Desktop\Overlays\BINGO - Public\restore-artifacts\pre-theme-player-upgrade-20260814-1612\restore-pre-theme-player-upgrade-20260814-1612.bundle
