@@ -2715,55 +2715,6 @@ function App() {
     }
   }
 
-  function applySkinToDraft(skin: ThemeSkinEntry) {
-    const sharedOverrides = normalizeThemeOverrides(skin.palette)
-    const controllerOverrides = normalizeThemeOverrides({
-      ...sharedOverrides,
-      ...skin.controllerPalette,
-    })
-    const cardsOverrides = normalizeThemeOverrides({
-      ...sharedOverrides,
-      ...skin.cardsPalette,
-    })
-
-    if (skin.mode) {
-      setThemeModeDraft(skin.mode)
-    }
-
-    if (themeLinkDraft) {
-      const linkedOverrides = normalizeThemeOverrides({
-        ...sharedOverrides,
-        ...skin.controllerPalette,
-        ...skin.cardsPalette,
-      })
-      setThemeOverridesDraft((current) => ({
-        ...current,
-        ...linkedOverrides,
-      }))
-      setSkinDraftNotice(`Applied ${skin.name} to linked draft colors. Click Save Theme to apply it live.`)
-      return
-    }
-
-    setThemeControllerOverridesDraft((current) => ({
-      ...current,
-      ...controllerOverrides,
-    }))
-    setThemeCardsOverridesDraft((current) => ({
-      ...current,
-      ...cardsOverrides,
-    }))
-    setSkinDraftNotice(`Applied ${skin.name} to split controller/cards draft colors. Click Save Theme to apply it live.`)
-  }
-
-  function submitApplySelectedSkin() {
-    if (!selectedSkin) {
-      setSkinDraftNotice('Choose a skin before applying.')
-      return
-    }
-
-    applySkinToDraft(selectedSkin)
-  }
-
   function submitApplySelectedSkinLive() {
     if (!selectedSkin) {
       setSkinDraftNotice('Choose a skin before applying live.')
@@ -2835,7 +2786,7 @@ function App() {
 
   function clearSelectedSkin() {
     setSelectedSkinId('')
-    setSkinDraftNotice('Draft skin selection cleared. Saved theme and colors are unchanged until you save.')
+    setSkinDraftNotice('Selection cleared. Saved theme and colors are unchanged until you save.')
   }
 
   function submitRemoveSkinAndRestoreDefaults() {
@@ -3052,9 +3003,8 @@ function App() {
   const skinLibraryLoading = skinLibraryState === 'loading'
   const skinLibraryReady = skinLibraryState === 'ready'
   const canReloadSkinLibrary = pendingAction === null
-  const canApplySelectedSkin =
+  const canApplySelectedSkinLive =
     capabilities.modTheme && pendingAction === null && skinLibraryReady && selectedSkin !== null
-  const canApplySelectedSkinLive = canApplySelectedSkin
   const canClearSelectedSkin = pendingAction === null && selectedSkinId.length > 0
   const canRemoveSkinAndRestoreDefaults = capabilities.modTheme && pendingAction === null
   const allowedHostList = allowedHosts.join(', ')
@@ -3486,7 +3436,7 @@ function App() {
                 <section className="theme-config-section theme-skin-library" aria-label="Skin library">
                   <header className="theme-config-header">
                     <h3>Skin Library</h3>
-                    <p>Load seasonal presets from /skins/skins-manifest.json and apply them to the current draft.</p>
+                    <p>Load seasonal presets from /skins/skins-manifest.json and apply them live.</p>
                   </header>
 
                   <p className="control-helper-text">
@@ -3530,14 +3480,11 @@ function App() {
                   </label>
 
                   <div className="control-actions theme-skin-library-actions">
-                    <button type="button" disabled={!canApplySelectedSkin} onClick={submitApplySelectedSkin}>
-                      Apply Skin To Draft
+                    <button type="button" disabled={!canApplySelectedSkinLive} onClick={submitApplySelectedSkinLive}>
+                      Apply Skin Live
                     </button>
-                      <button type="button" disabled={!canApplySelectedSkinLive} onClick={submitApplySelectedSkinLive}>
-                        Apply Skin Live
-                      </button>
                     <button type="button" className="secondary" disabled={!canClearSelectedSkin} onClick={clearSelectedSkin}>
-                      Clear Draft Selection
+                      Clear Selection
                     </button>
                     <button
                       type="button"
